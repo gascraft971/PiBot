@@ -10,5 +10,13 @@ class Robot:
 	setup -> Setups GPIO pins
 	"""
 
-	def __init__(self, GPIO_type: Any, pins) -> None:
+	def __init__(self, GPIO_type: Any, config: dict) -> None:
 		GPIO.setmode(GPIO_type)
+		self.config = config
+		self.pins = self.config["pins"]
+		self.setup()
+	
+	def setup(self) -> None:
+		wheels = self.pins["wheels"]
+		for pin in [wheels["right"]["fw"], wheels["right"]["bw"], wheels["left"]["fw"], wheels["left"]["bw"]]:
+			GPIO.setup(pin, GPIO.OUT)
