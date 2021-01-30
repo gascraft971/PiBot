@@ -1,5 +1,6 @@
 from typing import Any
 import RPi.GPIO as GPIO
+import time
 
 class Robot:
 	"""
@@ -20,3 +21,8 @@ class Robot:
 		wheels = self.pins["wheels"]
 		for pin in [wheels["right"]["fw"], wheels["right"]["bw"], wheels["left"]["fw"], wheels["left"]["bw"]]:
 			GPIO.setup(pin, GPIO.OUT)
+	
+	def test(self):
+		GPIO.output(27, True)
+		time.sleep(2)
+		GPIO.output(27, False)
